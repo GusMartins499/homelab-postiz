@@ -10,6 +10,8 @@ Pod=postiz.pod
 EnvironmentFile=%h/homelab-postiz/env/postiz.env
 Volume=postiz-config:/config
 Volume=postiz-uploads:/uploads
+Volume=%h/homelab-postiz/patches/subdomain.management.js:/app/apps/backend/dist/libraries/helpers/src/subdomain/subdomain.management.js:ro,Z
+Volume=%h/homelab-postiz/patches/linkedin.provider.js:/app/apps/backend/dist/libraries/nestjs-libraries/src/integrations/social/linkedin.provider.js:ro,Z
 PodmanArgs=--memory=1536m --memory-swap=1536m
 
 [Service]
