@@ -1,0 +1,24 @@
+[Unit]
+Description=Postiz Temporal
+Requires=postiz-postgres.service
+After=postiz-postgres.service
+
+[Container]
+Image=docker.io/temporalio/auto-setup:1.28.1
+ContainerName=postiz-temporal
+Pod=postiz.pod
+EnvironmentFile=%h/homelab-postiz/env/temporal.env
+Volume=%h/homelab-postiz/temporal/dynamicconfig:/etc/temporal/config/dynamicconfig:ro,Z
+HealthCmd=temporal operator cluster health --address 127.0.0.1:7233
+HealthInterval=10s
+HealthStartPeriod=60s
+HealthRetries=20
+Notify=healthy
+PodmanArgs=--memory=512m --memory-swap=512m
+
+[Service]
+Restart=always
+TimeoutStartSec=600
+
+[Install]
+WantedBy=default.target

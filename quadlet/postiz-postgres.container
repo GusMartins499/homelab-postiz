@@ -1,0 +1,20 @@
+[Unit]
+Description=Postiz PostgreSQL
+
+[Container]
+Image=docker.io/library/postgres:17-alpine
+ContainerName=postiz-postgres
+Pod=postiz.pod
+Volume=postiz-pgdata:/var/lib/postgresql/data
+EnvironmentFile=%h/homelab-postiz/env/postgres.env
+HealthCmd=pg_isready -U postiz
+HealthInterval=10s
+Notify=healthy
+PodmanArgs=--memory=384m --memory-swap=384m
+
+[Service]
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target

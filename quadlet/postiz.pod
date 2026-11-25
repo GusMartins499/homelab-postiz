@@ -1,0 +1,9 @@
+[Unit]
+Description=Postiz pod
+
+[Pod]
+PodName=postiz
+PublishPort=127.0.0.1:4007:5000
+
+[Install]
+WantedBy=default.target

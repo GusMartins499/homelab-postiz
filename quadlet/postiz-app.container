@@ -1,0 +1,20 @@
+[Unit]
+Description=Postiz social media scheduler
+Requires=postiz-postgres.service postiz-redis.service postiz-temporal.service
+After=postiz-postgres.service postiz-redis.service postiz-temporal.service
+
+[Container]
+Image=ghcr.io/gitroomhq/postiz-app:v2.26.0
+ContainerName=postiz-app
+Pod=postiz.pod
+EnvironmentFile=%h/homelab-postiz/env/postiz.env
+Volume=postiz-config:/config
+Volume=postiz-uploads:/uploads
+PodmanArgs=--memory=1536m --memory-swap=1536m
+
+[Service]
+Restart=always
+TimeoutStartSec=600
+
+[Install]
+WantedBy=default.target

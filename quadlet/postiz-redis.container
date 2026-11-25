@@ -1,0 +1,20 @@
+[Unit]
+Description=Postiz Redis
+
+[Container]
+Image=docker.io/library/redis:7.2
+ContainerName=postiz-redis
+Pod=postiz.pod
+Exec=redis-server --bind 127.0.0.1 --appendonly yes
+Volume=postiz-redis:/data
+HealthCmd=redis-cli ping
+HealthInterval=10s
+Notify=healthy
+PodmanArgs=--memory=128m --memory-swap=128m
+
+[Service]
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target
