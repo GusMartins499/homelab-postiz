@@ -4,6 +4,7 @@ Description=Postiz pod
 [Pod]
 PodName=postiz
 PublishPort=127.0.0.1:4007:5000
+AddHost=home-lab.tailb8c929.ts.net:100.93.96.25
 
 [Install]
 WantedBy=default.target
